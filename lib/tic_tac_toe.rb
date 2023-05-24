@@ -55,6 +55,52 @@ class TicTacToe
        end
 
        def turn
+       input= gets
+       self.turn unless (1..9).include?(input.to_i)
+       index = self.input_to_index(input)
+       if valid_move?(index)
+        move(index, self.current_player)
+        self.display_board
+         end
        end
+
+       def won?
+            # all possible winning combinations
+    WIN_COMBINATIONS.each do |win_combo|
+          if [["X"], ["O"]].include?([@board[win_combo[0]], @board[win_combo[1]], @board[win_combo[2]]].uniq)
+            return win_combo
+          end
+       end
+       false
+      end
+
+       def full?
+        !@board.include?(" ")
+       end
+
+       def draw?
+        self.full? && !self.won?
+       end
+
+       def over?
+        self.won? || self.draw?
+       end
+
+       def winner
+        if self.won?
+          self.current_player == "X" ? "O" : "X"
+        end
+      end
+
+      def play
+        until self.over?
+          self.turn
+        end
+        if self.won?
+          puts "Congratulations #{self.winner}!"
+        elsif self.draw?
+          puts "Cat's Game!"
+         end
+      end
   end
   
