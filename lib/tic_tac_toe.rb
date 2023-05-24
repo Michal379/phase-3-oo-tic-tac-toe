@@ -35,5 +35,26 @@ class TicTacToe
     def move(index, player = "X")
       @board[index] = player
     end
+
+       # checks if an index has been occupied
+    def position_taken?(index)
+     @board[index] != " "
+    end  
+    
+        #checks if a move made is valid
+    def valid_move?(index)
+      @board[index] == " "
+    end
+
+    def turn_count
+      9 - @board.count(" ")
+    end
+
+       def current_player
+        self.turn_count.even? ? "X" : "O"
+       end
+
+       def turn
+       end
   end
   
