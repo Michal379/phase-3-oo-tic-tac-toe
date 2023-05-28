@@ -19,11 +19,11 @@ class TicTacToe
 
         #  shows the current state of the g.board
     def display_board
-      print " #{@board[0]} | #{@board[1]} | #{@board[2]} "
-      print "-----------"   #shows boundaries btn rows
-      print " #{@board[3]} | #{@board[4]} | #{@board[5]} "
-      print "-----------"
-      print " #{@board[6]} | #{@board[7]} | #{@board[8]} "
+      puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
+      puts "-----------"   #shows boundaries btn rows
+      puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
+      puts "-----------"
+      puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
     end
   
         # represents user position on the g.board
@@ -55,14 +55,17 @@ class TicTacToe
        end
 
        def turn
-       input= gets
-       self.turn unless (1..9).include?(input.to_i)
-       index = self.input_to_index(input)
-       if valid_move?(index)
-        move(index, self.current_player)
-        self.display_board
-         end
-       end
+        puts "Please enter a number between 1 and 9:"
+        input = gets.strip
+        index = input_to_index(input)
+        if valid_move?(index)
+          move(index, current_player)
+          display_board
+        else
+          puts "Invalid move. Please try again."
+          turn
+        end
+      end
 
        def won?
             # all possible winning combinations
